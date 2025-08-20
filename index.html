@@ -1,0 +1,2551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beauty from Ashes - Christian Sexual Trauma Recovery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', serif;
+            background: linear-gradient(135deg, #6a1b9a 0%, #ad1457 30%, #d81b60 60%, #f06292 100%);
+            color: #2d2d2d;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 414px;
+            margin: 0 auto;
+            background: #fafafa;
+            min-height: 100vh;
+            position: relative;
+            box-shadow: 0 0 30px rgba(0,0,0,0.2);
+        }
+
+        .screen {
+            display: none;
+            padding: 20px;
+            padding-bottom: 80px;
+            min-height: 100vh;
+            background: linear-gradient(to bottom, #ffffff, #f8f9fa);
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .audio-toggle {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: linear-gradient(45deg, #8e24aa, #6a1b9a);
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 11px;
+            box-shadow: 0 2px 8px rgba(142, 36, 170, 0.3);
+        }
+
+        .audio-toggle.playing {
+            background: linear-gradient(45deg, #ad1457, #880e4f);
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            color: #4a148c;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 8px;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #6a1b9a;
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        .verse {
+            background: linear-gradient(135deg, #e8eaf6, #f3e5f5);
+            padding: 18px;
+            border-radius: 12px;
+            border-left: 4px solid #8e24aa;
+            margin: 18px 0;
+            font-style: italic;
+            box-shadow: 0 2px 12px rgba(142, 36, 170, 0.1);
+            line-height: 1.5;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #8e24aa, #6a1b9a);
+            color: white;
+            border: none;
+            padding: 14px 22px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 15px;
+            margin: 8px 4px;
+            width: calc(100% - 8px);
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 12px rgba(142, 36, 170, 0.3);
+            font-family: inherit;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 5px 16px rgba(142, 36, 170, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(45deg, #757575, #616161);
+            box-shadow: 0 3px 12px rgba(117, 117, 117, 0.3);
+        }
+
+        .btn-danger {
+            background: linear-gradient(45deg, #d32f2f, #b71c1c);
+            box-shadow: 0 3px 12px rgba(211, 47, 47, 0.3);
+        }
+
+        .btn-success {
+            background: linear-gradient(45deg, #388e3c, #2e7d32);
+            box-shadow: 0 3px 12px rgba(56, 142, 60, 0.3);
+        }
+
+        .btn-healing {
+            background: linear-gradient(45deg, #ad1457, #880e4f);
+            box-shadow: 0 3px 12px rgba(173, 20, 87, 0.3);
+        }
+
+        .crisis-banner {
+            background: linear-gradient(45deg, #d32f2f, #b71c1c);
+            color: white;
+            padding: 18px;
+            border-radius: 12px;
+            margin: 18px 0;
+            text-align: center;
+            font-weight: bold;
+            box-shadow: 0 3px 15px rgba(211, 47, 47, 0.3);
+            line-height: 1.4;
+        }
+
+        .safety-alert {
+            background: linear-gradient(45deg, #ff6f00, #e65100);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            text-align: center;
+            font-weight: bold;
+            box-shadow: 0 3px 12px rgba(255, 111, 0, 0.3);
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 414px;
+            background: white;
+            border-top: 1px solid #e1bee7;
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0;
+            box-shadow: 0 -2px 12px rgba(142, 36, 170, 0.1);
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            color: #757575;
+            font-size: 11px;
+            cursor: pointer;
+            padding: 6px;
+            text-align: center;
+            transition: color 0.3s ease;
+            font-family: inherit;
+        }
+
+        .nav-btn.active {
+            color: #8e24aa;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            max-width: 340px;
+            max-height: 80vh;
+            overflow-y: auto;
+            margin: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+
+        .close-btn {
+            float: right;
+            font-size: 22px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #aaa;
+        }
+
+        .close-btn:hover {
+            color: #000;
+        }
+
+        .healing-stage {
+            background: linear-gradient(135deg, #f8f9fa, #e8eaf6);
+            padding: 18px;
+            border-radius: 12px;
+            margin: 15px 0;
+            border-left: 4px solid #ad1457;
+            box-shadow: 0 2px 10px rgba(173, 20, 87, 0.1);
+        }
+
+        .stage-title {
+            font-size: 17px;
+            font-weight: bold;
+            color: #4a148c;
+            margin-bottom: 8px;
+        }
+
+        .stage-description {
+            color: #5d4037;
+            line-height: 1.4;
+            font-size: 14px;
+        }
+
+        .resource-card {
+            background: white;
+            border: 2px solid #e1bee7;
+            border-radius: 12px;
+            padding: 18px;
+            margin: 15px 0;
+            box-shadow: 0 2px 10px rgba(142, 36, 170, 0.1);
+        }
+
+        .resource-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #6a1b9a;
+            margin-bottom: 8px;
+        }
+
+        .resource-description {
+            color: #5d4037;
+            line-height: 1.4;
+            font-size: 14px;
+        }
+
+        .input-group {
+            margin: 15px 0;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+            color: #4a148c;
+            font-size: 14px;
+        }
+
+        .input-group input,
+        .input-group textarea,
+        .input-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1bee7;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            background: #fafafa;
+        }
+
+        .input-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .trigger-warning {
+            background: linear-gradient(45deg, #ff8a65, #ff7043);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 3px 12px rgba(255, 138, 101, 0.3);
+        }
+
+        .back-btn {
+            background: #757575;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 15px;
+            cursor: pointer;
+            margin-bottom: 15px;
+            font-size: 13px;
+        }
+
+        .progress-indicator {
+            background: #e1bee7;
+            border-radius: 10px;
+            height: 16px;
+            margin: 12px 0;
+        }
+
+        .progress-fill {
+            background: linear-gradient(45deg, #8e24aa, #6a1b9a);
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        .journey-step {
+            background: linear-gradient(135deg, #fff, #f8f9fa);
+            border: 2px solid #e1bee7;
+            border-radius: 12px;
+            padding: 16px;
+            margin: 12px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(142, 36, 170, 0.1);
+        }
+
+        .journey-step:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(142, 36, 170, 0.2);
+        }
+
+        .journey-step.completed {
+            background: linear-gradient(135deg, #e8f5e8, #f1f8e9);
+            border-color: #4caf50;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: #8e24aa;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 24px;
+            font-size: 12px;
+            margin-right: 10px;
+        }
+
+        .step-title {
+            font-weight: bold;
+            color: #4a148c;
+            font-size: 15px;
+        }
+
+        .step-description {
+            color: #5d4037;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        .safety-plan-item {
+            background: #fff;
+            border: 1px solid #e1bee7;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 10px 0;
+        }
+
+        .coping-technique {
+            background: linear-gradient(135deg, #f3e5f5, #e8eaf6);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 12px 0;
+            border-left: 4px solid #ad1457;
+        }
+
+        .technique-title {
+            font-weight: bold;
+            color: #4a148c;
+            font-size: 15px;
+            margin-bottom: 6px;
+        }
+
+        .technique-description {
+            color: #5d4037;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .scripture-card {
+            background: linear-gradient(45deg, #8e24aa, #6a1b9a);
+            color: white;
+            padding: 18px;
+            border-radius: 12px;
+            margin: 18px 0;
+            text-align: center;
+            box-shadow: 0 3px 15px rgba(142, 36, 170, 0.3);
+        }
+
+        .scripture-text {
+            font-size: 15px;
+            font-style: italic;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .scripture-ref {
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .journal-entry {
+            background: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #8e24aa;
+            box-shadow: 0 2px 8px rgba(142, 36, 170, 0.1);
+        }
+
+        .message {
+            padding: 12px;
+            border-radius: 8px;
+            margin: 12px 0;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .message.success {
+            background: #e8f5e8;
+            color: #2e7d32;
+            border: 1px solid #4caf50;
+        }
+
+        .message.info {
+            background: #e3f2fd;
+            color: #1565c0;
+            border: 1px solid #2196f3;
+        }
+
+        .message.warning {
+            background: #fff3e0;
+            color: #ef6c00;
+            border: 1px solid #ff9800;
+        }
+
+        .grounding-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .grounding-item {
+            background: linear-gradient(135deg, #f8f9fa, #e8eaf6);
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .grounding-item:hover {
+            border-color: #8e24aa;
+            transform: scale(1.02);
+        }
+
+        .grounding-item.completed {
+            background: linear-gradient(135deg, #e8f5e8, #f1f8e9);
+            border-color: #4caf50;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin: 18px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #f8f9fa, #e8eaf6);
+            padding: 16px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(142, 36, 170, 0.1);
+        }
+
+        .stat-number {
+            font-size: 22px;
+            font-weight: bold;
+            color: #8e24aa;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #5d4037;
+            margin-top: 4px;
+        }
+
+        .affirmation-card {
+            background: linear-gradient(45deg, #ad1457, #880e4f);
+            color: white;
+            padding: 16px;
+            border-radius: 12px;
+            margin: 15px 0;
+            text-align: center;
+            box-shadow: 0 3px 12px rgba(173, 20, 87, 0.3);
+        }
+
+        .affirmation-text {
+            font-size: 15px;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .therapy-type {
+            background: white;
+            border: 2px solid #e1bee7;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 12px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .therapy-type:hover {
+            border-color: #8e24aa;
+            background: #fafafa;
+        }
+
+        .therapy-title {
+            font-weight: bold;
+            color: #4a148c;
+            font-size: 15px;
+            margin-bottom: 6px;
+        }
+
+        .therapy-description {
+            color: #5d4037;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .hotline-card {
+            background: linear-gradient(45deg, #d32f2f, #b71c1c);
+            color: white;
+            padding: 16px;
+            border-radius: 12px;
+            margin: 12px 0;
+            text-align: center;
+            box-shadow: 0 3px 15px rgba(211, 47, 47, 0.3);
+        }
+
+        .hotline-title {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .hotline-number {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 8px 0;
+        }
+
+        .hotline-description {
+            font-size: 13px;
+            line-height: 1.3;
+        }
+
+        .recovery-milestone {
+            background: linear-gradient(135deg, #e8f5e8, #f1f8e9);
+            border: 2px solid #4caf50;
+            border-radius: 12px;
+            padding: 16px;
+            margin: 12px 0;
+            text-align: center;
+        }
+
+        .milestone-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .milestone-title {
+            font-weight: bold;
+            color: #2e7d32;
+            font-size: 16px;
+            margin-bottom: 6px;
+        }
+
+        .milestone-description {
+            color: #4caf50;
+            font-size: 13px;
+        }
+
+        .prayer-request {
+            background: linear-gradient(135deg, #e8eaf6, #f3e5f5);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 12px 0;
+            border-left: 4px solid #8e24aa;
+        }
+
+        .prayer-title {
+            font-weight: bold;
+            color: #4a148c;
+            font-size: 15px;
+            margin-bottom: 6px;
+        }
+
+        .prayer-text {
+            color: #5d4037;
+            font-style: italic;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Welcome Screen -->
+        <div class="screen active" id="welcome">
+            <div class="header">
+                <button class="audio-toggle" onclick="toggleAudio()">🎵 Music</button>
+                <div class="logo">Beauty from Ashes</div>
+                <div class="subtitle">Christian Sexual Trauma Recovery</div>
+            </div>
+            
+            <div class="verse">
+                "To grant to those who mourn in Zion, giving them a beautiful headdress instead of ashes, the oil of gladness instead of mourning, the garment of praise instead of the spirit of heaviness."
+                <br><strong>- Isaiah 61:3</strong>
+            </div>
+
+            <div class="trigger-warning">
+                ⚠️ TRIGGER WARNING: This app addresses sexual trauma and may contain triggering content. Please use with care and professional support.
+            </div>
+
+            <button class="btn" onclick="showScreen('dashboard')">Begin Your Healing Journey</button>
+            <button class="btn btn-danger" onclick="showScreen('crisis')">I Need Help Now</button>
+            
+            <div class="verse">
+                "The Lord is close to the brokenhearted and saves those who are crushed in spirit. The righteous person may have many troubles, but the Lord delivers him from them all."
+                <br><strong>- Psalm 34:18-19</strong>
+            </div>
+        </div>
+
+        <!-- Dashboard -->
+        <div class="screen" id="dashboard">
+            <div class="header">
+                <button class="audio-toggle" onclick="toggleAudio()">🎵 Music</button>
+                <div class="logo">Your Healing Dashboard</div>
+                <div class="subtitle">God is making all things new</div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="healing-days">0</div>
+                    <div class="stat-label">Days of Healing</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="journal-entries">0</div>
+                    <div class="stat-label">Journal Entries</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="coping-uses">0</div>
+                    <div class="stat-label">Coping Tools Used</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="milestones">0</div>
+                    <div class="stat-label">Milestones Reached</div>
+                </div>
+            </div>
+
+            <div class="scripture-card">
+                <div class="scripture-text" id="daily-healing-verse">
+                    "He heals the brokenhearted and binds up their wounds."
+                </div>
+                <div class="scripture-ref" id="daily-verse-ref">Psalm 147:3</div>
+            </div>
+
+            <button class="btn" onclick="showScreen('healing-journey')">Track Healing Journey</button>
+            <button class="btn" onclick="showScreen('coping-tools')">Coping & Grounding Tools</button>
+            <button class="btn btn-healing" onclick="showScreen('healing-journal')">Sacred Healing Journal</button>
+            <button class="btn" onclick="showScreen('safety-planning')">Safety Planning</button>
+            <button class="btn" onclick="showScreen('trauma-education')">Understanding Trauma</button>
+        </div>
+
+        <!-- Healing Journey -->
+        <div class="screen" id="healing-journey">
+            <button class="back-btn" onclick="showScreen('dashboard')">← Back</button>
+            <div class="header">
+                <div class="logo">Healing Journey</div>
+                <div class="subtitle">Every step forward matters</div>
+            </div>
+
+            <div class="verse">
+                "Forget the former things; do not dwell on the past. See, I am doing a new thing! Now it springs up; do you not perceive it?"
+                <br><strong>- Isaiah 43:18-19</strong>
+            </div>
+
+            <div class="healing-stage">
+                <div class="stage-title">🌱 Stage 1: Safety & Stabilization</div>
+                <div class="stage-description">
+                    Establishing physical and emotional safety, learning coping skills, and beginning to trust again.
+                </div>
+                <button class="btn" onclick="trackStage('safety')">I'm Working on Safety</button>
+            </div>
+
+            <div class="healing-stage">
+                <div class="stage-title">🌿 Stage 2: Remembrance & Mourning</div>
+                <div class="stage-description">
+                    Processing trauma memories in a safe therapeutic environment with God's comfort.
+                </div>
+                <button class="btn" onclick="trackStage('processing')">I'm Processing Trauma</button>
+            </div>
+
+            <div class="healing-stage">
+                <div class="stage-title">🌸 Stage 3: Reconnection & Integration</div>
+                <div class="stage-description">
+                    Rebuilding relationships, finding meaning, and living as a survivor, not a victim.
+                </div>
+                <button class="btn" onclick="trackStage('reconnection')">I'm Reconnecting</button>
+            </div>
+
+            <div class="healing-stage">
+                <div class="stage-title">🌺 Stage 4: Growth & Thriving</div>
+                <div class="stage-description">
+                    Using your story to help others, finding purpose in pain, and experiencing post-traumatic growth.
+                </div>
+                <button class="btn" onclick="trackStage('thriving')">I'm Thriving</button>
+            </div>
+
+            <div class="progress-indicator">
+                <div class="progress-fill" id="journey-progress" style="width: 0%"></div>
+            </div>
+
+            <div class="input-group">
+                <label>How are you feeling about your healing today?</label>
+                <textarea id="healing-reflection" placeholder="Share your heart with God..."></textarea>
+            </div>
+
+            <button class="btn btn-success" onclick="saveHealingEntry()">Save Healing Reflection</button>
+        </div>
+
+        <!-- Coping Tools -->
+        <div class="screen" id="coping-tools">
+            <button class="back-btn" onclick="showScreen('dashboard')">← Back</button>
+            <div class="header">
+                <div class="logo">Coping & Grounding</div>
+                <div class="subtitle">Tools for difficult moments</div>
+            </div>
+
+            <div class="verse">
+                "When you pass through the waters, I will be with you; and when you pass through the rivers, they will not sweep over you."
+                <br><strong>- Isaiah 43:2</strong>
+            </div>
+
+            <div class="coping-technique">
+                <div class="technique-title">🫁 Grounding Breathing</div>
+                <div class="technique-description">Use breath to anchor yourself in the present moment with God</div>
+                <button class="btn" onclick="startGroundingBreathing()">Start Breathing Exercise</button>
+            </div>
+
+            <div class="coping-technique">
+                <div class="technique-title">✋ 5-4-3-2-1 Grounding</div>
+                <div class="technique-description">Ground yourself using your five senses to stay present</div>
+                <button class="btn" onclick="showScreen('grounding-exercise')">Begin Grounding</button>
+            </div>
+
+            <div class="coping-technique">
+                <div class="technique-title">🛡️ STOP Technique</div>
+                <div class="technique-description">Stop, Take a breath, Observe, Proceed with God's wisdom</div>
+                <button class="btn" onclick="showStopTechnique()">Practice STOP</button>
+            </div>
+
+            <div class="coping-technique">
+                <div class="technique-title">🧠 Thought Defusion</div>
+                <div class="technique-description">Separate yourself from intrusive thoughts and replace with truth</div>
+                <button class="btn" onclick="showScreen('thought-defusion')">Challenge Thoughts</button>
+            </div>
+
+            <div class="coping-technique">
+                <div class="technique-title">💝 Self-Compassion Prayer</div>
+                <div class="technique-description">Practice speaking to yourself as God speaks to you</div>
+                <button class="btn" onclick="showSelfCompassion()">Practice Self-Compassion</button>
+            </div>
+
+            <div class="coping-technique">
+                <div class="technique-title">⚓ Scripture Anchoring</div>
+                <div class="technique-description">Anchor yourself to God's truth when triggered</div>
+                <button class="btn" onclick="showScreen('scripture-anchoring')">Find Scripture Anchor</button>
+            </div>
+        </div>
+
+        <!-- Grounding Exercise -->
+        <div class="screen" id="grounding-exercise">
+            <button class="back-btn" onclick="showScreen('coping-tools')">← Back to Coping Tools</button>
+            <div class="header">
+                <div class="logo">5-4-3-2-1 Grounding</div>
+                <div class="subtitle">Come back to the present moment</div>
+            </div>
+
+            <div class="verse">
+                "Be still, and know that I am God."
+                <br><strong>- Psalm 46:10</strong>
+            </div>
+
+            <div class="grounding-grid">
+                <div class="grounding-item" onclick="completeGrounding('see', this)">
+                    <strong>5 Things You SEE</strong>
+                    <div>Look around and name 5 things you can see</div>
+                </div>
+                <div class="grounding-item" onclick="completeGrounding('hear', this)">
+                    <strong>4 Things You HEAR</strong>
+                    <div>Listen and name 4 sounds around you</div>
+                </div>
+                <div class="grounding-item" onclick="completeGrounding('touch', this)">
+                    <strong>3 Things You TOUCH</strong>
+                    <div>Feel 3 different textures</div>
+                </div>
+                <div class="grounding-item" onclick="completeGrounding('smell', this)">
+                    <strong>2 Things You SMELL</strong>
+                    <div>Notice 2 scents in your environment</div>
+                </div>
+                <div class="grounding-item" onclick="completeGrounding('taste', this)">
+                    <strong>1 Thing You TASTE</strong>
+                    <div>Notice any taste in your mouth</div>
+                </div>
+                <div class="grounding-item" onclick="completeGrounding('prayer', this)">
+                    <strong>Say a Prayer</strong>
+                    <div>"God, I am here with You in this moment"</div>
+                </div>
+            </div>
+
+            <div class="progress-indicator">
+                <div class="progress-fill" id="grounding-progress" style="width: 0%"></div>
+            </div>
+
+            <div class="affirmation-card">
+                <div class="affirmation-text">
+                    "I am safe in this moment. God is with me. This feeling will pass. I am stronger than I know."
+                </div>
+            </div>
+
+            <button class="btn btn-success" onclick="completeGroundingExercise()">Complete Grounding</button>
+        </div>
+
+        <!-- Thought Defusion -->
+        <div class="screen" id="thought-defusion">
+            <button class="back-btn" onclick="showScreen('coping-tools')">← Back to Coping Tools</button>
+            <div class="header">
+                <div class="logo">Thought Defusion</div>
+                <div class="subtitle">Separating yourself from harmful thoughts</div>
+            </div>
+
+            <div class="verse">
+                "We demolish arguments and every pretension that sets itself up against the knowledge of God, and we take captive every thought to make it obedient to Christ."
+                <br><strong>- 2 Corinthians 10:5</strong>
+            </div>
+
+            <div class="input-group">
+                <label>What intrusive or painful thought are you having?</label>
+                <textarea id="intrusive-thought" placeholder="Write the specific thought that's troubling you..."></textarea>
+            </div>
+
+            <div class="coping-technique">
+                <div class="technique-title">Defusion Techniques</div>
+                <div class="technique-description">
+                    • "I'm having the thought that..."<br>
+                    • "My trauma is telling me that..."<br>
+                    • "This is shame speaking, not truth..."<br>
+                    • "What would God say about this thought?"
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Rewrite this thought using a defusion technique:</label>
+                <textarea id="defused-thought" placeholder="I'm having the thought that..."></textarea>
+            </div>
+
+            <div class="input-group">
+                <label>What does God's truth say about this situation?</label>
+                <textarea id="gods-truth-thought" placeholder="What does Scripture say about this?"></textarea>
+            </div>
+
+            <div class="scripture-card">
+                <div class="scripture-text">
+                    "You are precious and honored in my sight, and I love you."
+                </div>
+                <div class="scripture-ref">Isaiah 43:4</div>
+            </div>
+
+            <button class="btn btn-success" onclick="saveThoughtDefusion()">Save Thought Work</button>
+        </div>
+
+        <!-- Scripture Anchoring -->
+        <div class="screen" id="scripture-anchoring">
+            <button class="back-btn" onclick="showScreen('coping-tools')">← Back to Coping Tools</button>
+            <div class="header">
+                <div class="logo">Scripture Anchoring</div>
+                <div class="subtitle">Anchoring your soul to God's truth</div>
+            </div>
+
+            <div class="verse">
+                "We have this hope as an anchor for the soul, firm and secure."
+                <br><strong>- Hebrews 6:19</strong>
+            </div>
+
+            <div class="input-group">
+                <label>What are you struggling with right now?</label>
+                <select id="struggle-type">
+                    <option value="">Select your struggle...</option>
+                    <option value="shame">Shame and self-blame</option>
+                    <option value="fear">Fear and anxiety</option>
+                    <option value="anger">Anger and rage</option>
+                    <option value="trust">Trust and intimacy issues</option>
+                    <option value="identity">Questions about identity and worth</option>
+                    <option value="flashbacks">Flashbacks and memories</option>
+                    <option value="nightmares">Nightmares and sleep issues</option>
+                    <option value="depression">Depression and hopelessness</option>
+                    <option value="relationships">Relationship difficulties</option>
+                    <option value="spiritual">Spiritual doubts and questions</option>
+                </select>
+            </div>
+
+            <div id="anchor-verse" class="scripture-card" style="display: none;">
+                <div class="scripture-text" id="anchor-text"></div>
+                <div class="scripture-ref" id="anchor-ref"></div>
+            </div>
+
+            <div class="input-group">
+                <label>Personal prayer based on this verse:</label>
+                <textarea id="personal-prayer" placeholder="Write a personal prayer using this verse..."></textarea>
+            </div>
+
+            <button class="btn" onclick="findAnchorVerse()">Find My Anchor Verse</button>
+            <button class="btn btn-success" onclick="saveAnchorVerse()">Save This Anchor</button>
+        </div>
+
+        <!-- Healing Journal -->
+        <div class="screen" id="healing-journal">
+            <button class="back-btn" onclick="showScreen('dashboard')">← Back</button>
+            <div class="header">
+                <div class="logo">Sacred Healing Journal</div>
+                <div class="subtitle">Pour out your heart to God</div>
+            </div>
+
+            <div class="verse">
+                "Trust in him at all times, you people; pour out your hearts to him, for God is our refuge."
+                <br><strong>- Psalm 62:8</strong>
+            </div>
+
+            <div class="input-group">
+                <label>How are you feeling today? (Be completely honest)</label>
+                <textarea id="feeling-today" placeholder="God knows your heart already - be honest about how you feel..."></textarea>
+            </div>
+
+            <div class="input-group">
+                <label>What triggered difficult feelings today?</label>
+                <textarea id="triggers-today" placeholder="What happened that was difficult?"></textarea>
+            </div>
+
+            <div class="input-group">
+                <label>What coping strategies did you use?</label>
+                <textarea id="coping-used" placeholder="How did you take care of yourself?"></textarea>
+            </div>
+
+            <div class="input-group">
+                <label>Letter to God</label>
+                <textarea id="letter-to-god" placeholder="Dear God, today I need you to know..."></textarea>
+            </div>
+
+            <div class="input-group">
+                <label>Three things you're grateful for (however small)</label>
+                <textarea id="gratitude-list" placeholder="1. 
+2. 
+3. "></textarea>
+            </div>
+
+            <div class="input-group">
+                <label>One thing you did well today (self-compassion)</label>
+                <textarea id="self-compassion" placeholder="I did well when I..."></textarea>
+            </div>
+
+            <button class="btn btn-success" onclick="saveHealingJournal()">Save Journal Entry</button>
+
+            <div id="journal-entries-display"></div>
+        </div>
+
+        <!-- Safety Planning -->
+        <div class="screen" id="safety-planning">
+            <button class="back-btn" onclick="showScreen('dashboard')">← Back</button>
+            <div class="header">
+                <div class="logo">Safety Planning</div>
+                <div class="subtitle">Creating your personal safety plan</div>
+            </div>
+
+            <div class="verse">
+                "The name of the Lord is a fortified tower; the righteous run to it and are safe."
+                <br><strong>- Proverbs 18:10</strong>
+            </div>
+
+            <div class="safety-plan-item">
+                <div class="technique-title">🚨 Emergency Contacts</div>
+                <div class="input-group">
+                    <label>Trusted Friend/Family Member</label>
+                    <input type="text" id="emergency-contact-1" placeholder="Name and phone number">
+                </div>
+                <div class="input-group">
+                    <label>Therapist/Counselor</label>
+                    <input type="text" id="therapist-contact" placeholder="Name and phone number">
+                </div>
+                <div class="input-group">
+                    <label>Crisis Hotline</label>
+                    <input type="text" id="crisis-hotline" value="988 - Suicide & Crisis Lifeline" readonly>
+                </div>
+            </div>
+
+            <div class="safety-plan-item">
+                <div class="technique-title">⚠️ Warning Signs I'm Not Safe</div>
+                <div class="input-group">
+                    <textarea id="warning-signs" placeholder="List signs that indicate you might be in danger (thoughts, feelings, behaviors)..."></textarea>
+                </div>
+            </div>
+
+            <div class="safety-plan-item">
+                <div class="technique-title">🛡️ Coping Strategies That Help</div>
+                <div class="input-group">
+                    <textarea id="helpful-coping" placeholder="List specific things that help you feel safer..."></textarea>
+                </div>
+            </div>
+
+            <div class="safety-plan-item">
+                <div class="technique-title">🏠 Safe Places I Can Go</div>
+                <div class="input-group">
+                    <textarea id="safe-places" placeholder="Physical locations where you feel safe..."></textarea>
+                </div>
+            </div>
+
+            <div class="safety-plan-item">
+                <div class="technique-title">📖 Scripture Verses for Safety</div>
+                <div class="input-group">
+                    <textarea id="safety-verses" placeholder="Bible verses that remind you of God's protection..."></textarea>
+                </div>
+            </div>
+
+            <button class="btn btn-success" onclick="saveSafetyPlan()">Save Safety Plan</button>
+        </div>
+
+        <!-- Trauma Education -->
+        <div class="screen" id="trauma-education">
+            <button class="back-btn" onclick="showScreen('dashboard')">← Back</button>
+            <div class="header">
+                <div class="logo">Understanding Trauma</div>
+                <div class="subtitle">Knowledge brings healing</div>
+            </div>
+
+            <div class="verse">
+                "Then you will know the truth, and the truth will set you free."
+                <br><strong>- John 8:32</strong>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">What is Trauma?</div>
+                <div class="resource-description">
+                    Trauma is the result of events that are emotionally disturbing or life-threatening. Sexual trauma specifically affects your sense of safety, trust, and personal boundaries. Understanding this is key to healing.
+                </div>
+                <button class="btn" onclick="showScreen('trauma-basics')">Learn More</button>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">Common Trauma Responses</div>
+                <div class="resource-description">
+                    Hypervigilance, flashbacks, nightmares, emotional numbing, and physical symptoms are normal responses to abnormal experiences. Your body is trying to protect you.
+                </div>
+                <button class="btn" onclick="showScreen('trauma-responses')">Understand Responses</button>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">Trauma and Faith</div>
+                <div class="resource-description">
+                    Many survivors struggle with spiritual questions after trauma. These doubts are normal and don't reflect a lack of faith. God can handle your questions and anger.
+                </div>
+                <button class="btn" onclick="showScreen('trauma-faith')">Explore Faith Questions</button>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">Healing is Possible</div>
+                <div class="resource-description">
+                    Recovery from sexual trauma is possible with proper support, therapy, and time. Healing doesn't mean forgetting - it means the trauma no longer controls your life.
+                </div>
+                <button class="btn" onclick="showScreen('healing-hope')">Find Hope</button>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">Supporting Others</div>
+                <div class="resource-description">
+                    Learn how to support other survivors or how to talk to loved ones about your own healing journey. Community is essential for recovery.
+                </div>
+                <button class="btn" onclick="showScreen('supporting-others')">Learn to Support</button>
+            </div>
+        </div>
+
+        <!-- Crisis Support -->
+        <div class="screen" id="crisis">
+            <button class="back-btn" onclick="showScreen('dashboard')">← Back</button>
+            <div class="header">
+                <div class="logo">Crisis Support</div>
+                <div class="subtitle">You are not alone</div>
+            </div>
+
+            <div class="crisis-banner">
+                If you are in crisis, please contact your local helpline for immediate support
+            </div>
+
+            <div class="hotline-card">
+                <div class="hotline-title">988 Suicide & Crisis Lifeline</div>
+                <div class="hotline-number">Call or Text: 988</div>
+                <div class="hotline-description">24/7 free and confidential support for people in distress</div>
+            </div>
+
+            <div class="hotline-card">
+                <div class="hotline-title">RAINN National Sexual Assault Hotline</div>
+                <div class="hotline-number">1-800-656-HOPE (4673)</div>
+                <div class="hotline-description">Free, confidential support 24/7 for survivors and their loved ones</div>
+            </div>
+
+            <div class="verse">
+                "The Lord is close to the brokenhearted and saves those who are crushed in spirit."
+                <br><strong>- Psalm 34:18</strong>
+            </div>
+
+            <button class="btn" onclick="showScreen('crisis-coping')">Immediate Coping Strategies</button>
+            <button class="btn" onclick="showScreen('safety-planning')">Safety Planning</button>
+            <button class="btn" onclick="showEmergencyContacts()">Emergency Contacts</button>
+            <button class="btn btn-healing" onclick="showScreen('crisis-prayers')">Prayers for Crisis</button>
+
+            <div class="scripture-card">
+                <div class="scripture-text">
+                    "Though I walk through the valley of the shadow of death, I will fear no evil, for you are with me; your rod and your staff, they comfort me."
+                </div>
+                <div class="scripture-ref">Psalm 23:4</div>
+            </div>
+        </div>
+
+        <!-- Crisis Coping -->
+        <div class="screen" id="crisis-coping">
+            <button class="back-btn" onclick="showScreen('crisis')">← Back to Crisis Support</button>
+            <div class="header">
+                <div class="logo">Crisis Coping</div>
+                <div class="subtitle">Immediate strategies for safety</div>
+            </div>
+
+            <div class="verse">
+                "God is our refuge and strength, an ever-present help in trouble."
+                <br><strong>- Psalm 46:1</strong>
+            </div>
+
+            <div class="coping-technique">
+                <div class="technique-title">🚨 STOP Right Now</div>
+                <div class="technique-description">
+                    <strong>S</strong>top what you're doing<br>
+                    <strong>T</strong>ake 3 deep breaths<br>
+                    <strong>O</strong>bserve your surroundings - you are safe right now<br>
+                    <strong>P</strong>roceed with one safe action
+                </div>
+                <button class="btn" onclick="practiceStop()">Practice STOP</button>
+            </div>
+
+            <div class="coping-technique">
+                <div class="technique-title">🧊 Ice Cube Grounding</div>
+                <div class="technique-description">
+                    Hold ice cubes or run cold water over your hands. The intense cold sensation can help interrupt crisis feelings.
+                </div>
+                <button class="btn" onclick="useIceCube()">Use Ice Grounding</button>
+            </div>
+
+            <div class="coping-technique">
+                <div class="technique-title">📞 Call Someone Now</div>
+                <div class="technique-description">
+                    Don't isolate. Call a trusted friend, family member, therapist, or crisis line. Connection saves lives.
+                </div>
+                <button class="btn" onclick="showScreen('crisis')">View Crisis Numbers</button>
+            </div>
+
+            <div class="coping-technique">
+                <div class="technique-title">🏃‍♀️ Change Your Location</div>
+                <div class="technique-description">
+                    If you're somewhere that feels unsafe or triggering, move to a different room or go to a public place.
+                </div>
+                <button class="btn" onclick="changeLocation()">Find Safe Space</button>
+            </div>
+
+            <div class="affirmation-card">
+                <div class="affirmation-text">
+                    "This crisis will pass. I have survived difficult moments before. God is with me. I am not alone. Help is available."
+                </div>
+            </div>
+        </div>
+
+        <!-- Crisis Prayers -->
+        <div class="screen" id="crisis-prayers">
+            <button class="back-btn" onclick="showScreen('crisis')">← Back to Crisis Support</button>
+            <div class="header">
+                <div class="logo">Prayers for Crisis</div>
+                <div class="subtitle">Crying out to God in pain</div>
+            </div>
+
+            <div class="verse">
+                "In my distress I called to the Lord; I cried to my God for help. From his temple he heard my voice; my cry came before him, into his ears."
+                <br><strong>- Psalm 18:6</strong>
+            </div>
+
+            <div class="prayer-request">
+                <div class="prayer-title">Prayer for Immediate Safety</div>
+                <div class="prayer-text">
+                    "God, I am scared and hurting right now. I need you to be my refuge and strength. Surround me with your protection. Help me feel your presence. Show me the next safe step to take. I trust you with my life, even when I can't see the way forward. Amen."
+                </div>
+            </div>
+
+            <div class="prayer-request">
+                <div class="prayer-title">Prayer for When Overwhelmed</div>
+                <div class="prayer-text">
+                    "Lord, this pain feels too big for me to carry. I give it to you. Take this burden from my shoulders. Help me breathe. Help me remember that this moment will pass. Fill me with your peace that passes understanding. I can't do this alone, but with you, I can survive this. Amen."
+                </div>
+            </div>
+
+            <div class="prayer-request">
+                <div class="prayer-title">Prayer Against Shame</div>
+                <div class="prayer-text">
+                    "Father, shame is telling me lies about who I am. Remind me that I am your beloved child. What happened to me is not my fault. I am not dirty or broken beyond repair. You see me as precious and loved. Help me see myself through your eyes of love. Amen."
+                </div>
+            </div>
+
+            <div class="prayer-request">
+                <div class="prayer-title">Prayer for Hope</div>
+                <div class="prayer-text">
+                    "God, when I can't see hope, be my hope. When I can't feel your love, be my love. When healing seems impossible, be my healer. I choose to trust you with my story, even the painful parts. Use my pain for your glory and for the healing of others. Amen."
+                </div>
+            </div>
+
+            <button class="btn btn-success" onclick="savePersonalPrayer()">Write Personal Prayer</button>
+        </div>
+
+        <!-- Resources -->
+        <div class="screen" id="resources">
+            <button class="back-btn" onclick="showScreen('dashboard')">← Back</button>
+            <div class="header">
+                <div class="logo">Recovery Resources</div>
+                <div class="subtitle">Tools for your healing journey</div>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">Trauma-Informed Christian Therapy</div>
+                <div class="resource-description">
+                    Find therapists who understand both trauma recovery and faith integration.
+                </div>
+                <button class="btn" onclick="showScreen('therapy-resources')">Find Therapists</button>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">Support Groups</div>
+                <div class="resource-description">
+                    Connect with other survivors in faith-based recovery communities.
+                </div>
+                <button class="btn" onclick="showScreen('support-groups')">Find Support Groups</button>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">Books & Educational Materials</div>
+                <div class="resource-description">
+                    Recommended reading for trauma recovery and faith integration.
+                </div>
+                <button class="btn" onclick="showScreen('education-resources')">Browse Resources</button>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">Scripture for Survivors</div>
+                <div class="resource-description">
+                    Bible verses specifically chosen for trauma survivors and sexual abuse recovery.
+                </div>
+                <button class="btn" onclick="showScreen('survivor-scriptures')">Read Scriptures</button>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">Loved Ones & Secondary Trauma</div>
+                <div class="resource-description">
+                    Resources for family members and friends supporting survivors.
+                </div>
+                <button class="btn" onclick="showScreen('loved-ones-resources')">Support Resources</button>
+            </div>
+        </div>
+
+        <!-- About -->
+        <div class="screen" id="about">
+            <button class="back-btn" onclick="showScreen('dashboard')">← Back</button>
+            <div class="header">
+                <div class="logo">About Beauty from Ashes</div>
+                <div class="subtitle">Hope and healing in Christ</div>
+            </div>
+
+            <div class="verse">
+                "He has sent me to bind up the brokenhearted, to proclaim freedom for the captives and release from darkness for the prisoners."
+                <br><strong>- Isaiah 61:1</strong>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">Our Mission</div>
+                <div class="resource-description">
+                    Beauty from Ashes exists to provide hope, healing, and practical support for Christians who have experienced sexual trauma. We believe that God can bring beauty from the ashes of our worst experiences and that healing is possible through Christ's love and professional support.
+                </div>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">Created by</div>
+                <div class="resource-description">
+                    <strong>Made by Justin</strong><br>
+                    Depths to Heights<br>
+                    <a href="https://depthstoheights.org" target="_blank">depthstoheights.org</a><br>
+                    <a href="mailto:depthstoheights@gmail.com">depthstoheights@gmail.com</a>
+                </div>
+                <button class="btn btn-success" onclick="window.open('https://www.paypal.com/donate/?hosted_button_id=8GRE7B8C3TP2U', '_blank')">Donate via PayPal</button>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">Important Disclaimer</div>
+                <div class="resource-description">
+                    This app is not a substitute for professional therapy, medical care, or crisis intervention. If you are in immediate danger, please contact emergency services. This app is designed to supplement, not replace, professional treatment for trauma recovery.
+                </div>
+            </div>
+        </div>
+
+        <!-- Trauma Basics -->
+        <div class="screen" id="trauma-basics">
+            <button class="back-btn" onclick="showScreen('trauma-education')">← Back to Education</button>
+            <div class="header">
+                <div class="logo">Understanding Trauma</div>
+                <div class="subtitle">What happens when we experience trauma</div>
+            </div>
+
+            <div class="verse">
+                "The Lord is close to the brokenhearted and saves those who are crushed in spirit."
+                <br><strong>- Psalm 34:18</strong>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">What is Sexual Trauma?</div>
+                <div class="resource-description">
+                    Sexual trauma occurs when someone experiences a sexual act against their will. This includes rape, sexual assault, childhood sexual abuse, intimate partner sexual violence, and sexual harassment. The impact goes far beyond the physical - it affects emotions, relationships, spirituality, and sense of safety.
+                </div>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">Normal Responses to Abnormal Events</div>
+                <div class="resource-description">
+                    Your reactions to trauma are normal responses to abnormal events. These may include:<br>
+                    • <strong>Physical:</strong> Sleep problems, headaches, stomach issues, fatigue<br>
+                    • <strong>Emotional:</strong> Fear, anger, sadness, numbness, mood swings<br>
+                    • <strong>Mental:</strong> Flashbacks, nightmares, difficulty concentrating, memory problems<br>
+                    • <strong>Behavioral:</strong> Avoiding triggers, changes in eating, social withdrawal<br>
+                    • <strong>Spiritual:</strong> Questioning God, feeling abandoned, struggling with faith
+                </div>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">The Brain and Trauma</div>
+                <div class="resource-description">
+                    Trauma literally changes the brain. The amygdala (alarm system) becomes hyperactive while the prefrontal cortex (rational thinking) goes offline. This is why you might feel "crazy" or like you're overreacting. Your brain is doing exactly what it's designed to do - protect you from danger.
+                </div>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">It's Not Your Fault</div>
+                <div class="resource-description">
+                    Sexual trauma is NEVER the victim's fault. Regardless of what you were wearing, where you were, what you said, whether you knew the person, or any other factor - the responsibility lies completely with the perpetrator. God does not blame you for what someone else chose to do.
+                </div>
+            </div>
+        </div>
+
+        <!-- Trauma Responses -->
+        <div class="screen" id="trauma-responses">
+            <button class="back-btn" onclick="showScreen('trauma-education')">← Back to Education</button>
+            <div class="header">
+                <div class="logo">Common Trauma Responses</div>
+                <div class="subtitle">Understanding your body's protective reactions</div>
+            </div>
+
+            <div class="verse">
+                "My flesh and my heart may fail, but God is the strength of my heart and my portion forever."
+                <br><strong>- Psalm 73:26</strong>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">Fight, Flight, Freeze, or Fawn</div>
+                <div class="resource-description">
+                    <strong>Fight:</strong> Becoming aggressive, argumentative, or confrontational<br>
+                    <strong>Flight:</strong> Wanting to run away, feeling restless, avoiding situations<br>
+                    <strong>Freeze:</strong> Feeling paralyzed, unable to move or speak, dissociation<br>
+                    <strong>Fawn:</strong> People-pleasing, trying to appease others, losing your voice
+                </div>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">Hypervigilance</div>
+                <div class="resource-description">
+                    Constantly scanning for danger, being easily startled, difficulty relaxing, feeling like you need to have your back to the wall. This exhausting state of alertness is your brain trying to keep you safe.
+                </div>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">Flashbacks and Triggers</div>
+                <div class="resource-description">
+                    Flashbacks can involve all five senses and make you feel like the trauma is happening again. Triggers can be sights, sounds, smells, touches, or situations that remind your body of the trauma. Understanding triggers helps you prepare and respond with self-compassion.
+                </div>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">Dissociation</div>
+                <div class="resource-description">
+                    Feeling disconnected from your body, emotions, or surroundings. You might feel like you're watching yourself from outside your body or like things aren't real. Dissociation was a survival mechanism that helped you endure trauma.
+                </div>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">Emotional Numbing</div>
+                <div class="resource-description">
+                    Sometimes the brain shuts down emotions to protect you from overwhelming pain. While this can be concerning, it's a normal protective response. Emotions will return as you heal and feel safer.
+                </div>
+            </div>
+        </div>
+
+        <!-- Trauma and Faith -->
+        <div class="screen" id="trauma-faith">
+            <button class="back-btn" onclick="showScreen('trauma-education')">← Back to Education</button>
+            <div class="header">
+                <div class="logo">Trauma and Faith</div>
+                <div class="subtitle">Wrestling with God after trauma</div>
+            </div>
+
+            <div class="verse">
+                "My God, my God, why have you forsaken me? Why are you so far from saving me, so far from my cries of anguish?"
+                <br><strong>- Psalm 22:1</strong>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">Common Spiritual Questions</div>
+                <div class="resource-description">
+                    • Where was God when this happened?<br>
+                    • Why didn't God protect me?<br>
+                    • Am I being punished for something?<br>
+                    • Is this part of God's plan?<br>
+                    • How can a loving God allow such evil?<br>
+                    • Am I still pure/worthy of God's love?<br>
+                    These questions are normal and don't indicate weak faith.
+                </div>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">God Can Handle Your Anger</div>
+                <div class="resource-description">
+                    Many Psalms express anger at God (Psalm 13, 22, 88). Job questioned God extensively. Jesus himself cried out in anguish. God is big enough to handle your pain, questions, and even anger. Honest communication with God is the foundation of authentic relationship.
+                </div>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">Spiritual Abuse and Religious Trauma</div>
+                <div class="resource-description">
+                    Sometimes religious leaders or communities respond to trauma with harmful theology: "God allows everything for a reason," "You need to forgive and move on," "If you had enough faith, you'd be healed." These responses can cause additional trauma and don't reflect God's heart.
+                </div>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">God's Heart for Trauma Survivors</div>
+                <div class="resource-description">
+                    God is particularly close to the brokenhearted (Psalm 34:18). Christ came to bind up the brokenhearted and set captives free (Isaiah 61:1). Your trauma grieves God's heart. You are not damaged goods - you are God's beloved child, precious and honored in His sight.
+                </div>
+            </div>
+        </div>
+
+        <!-- Healing Hope -->
+        <div class="screen" id="healing-hope">
+            <button class="back-btn" onclick="showScreen('trauma-education')">← Back to Education</button>
+            <div class="header">
+                <div class="logo">Healing is Possible</div>
+                <div class="subtitle">Hope for your journey</div>
+            </div>
+
+            <div class="verse">
+                "And we know that in all things God works for the good of those who love him, who have been called according to his purpose."
+                <br><strong>- Romans 8:28</strong>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">What Healing Looks Like</div>
+                <div class="resource-description">
+                    Healing doesn't mean forgetting or "getting over it." Healing means the trauma no longer controls your life. You can remember without being overwhelmed. You can feel safe again. You can trust again. You can experience joy and peace. The wound becomes a scar - still there, but no longer bleeding.
+                </div>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">Healing is Not Linear</div>
+                <div class="resource-description">
+                    Some days will be better than others. Progress isn't always visible. Setbacks don't mean you're not healing. Think of healing like a spiral staircase - sometimes you face the same direction as before, but you're on a higher level. Be patient and gentle with yourself.
+                </div>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">Post-Traumatic Growth</div>
+                <div class="resource-description">
+                    Many survivors experience growth beyond their pre-trauma functioning. This might include deeper relationships, increased compassion, stronger faith, clearer priorities, greater appreciation for life, and a sense of personal strength. Your pain can become a source of purpose and ministry to others.
+                </div>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">Beauty from Ashes</div>
+                <div class="resource-description">
+                    God specializes in redemption - bringing beauty from ashes, joy from mourning, praise from despair. Your story isn't over. The enemy meant your trauma for evil, but God can use it for good. Your healing can become a beacon of hope for other survivors.
+                </div>
+            </div>
+        </div>
+
+        <!-- Supporting Others -->
+        <div class="screen" id="supporting-others">
+            <button class="back-btn" onclick="showScreen('trauma-education')">← Back to Education</button>
+            <div class="header">
+                <div class="logo">Supporting Others</div>
+                <div class="subtitle">How to help fellow survivors</div>
+            </div>
+
+            <div class="verse">
+                "Carry each other's burdens, and in this way you will fulfill the law of Christ."
+                <br><strong>- Galatians 6:2</strong>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">Helpful Responses</div>
+                <div class="resource-description">
+                    • "I believe you"<br>
+                    • "I'm sorry this happened to you"<br>
+                    • "It's not your fault"<br>
+                    • "How can I support you?"<br>
+                    • "You're brave for telling me"<br>
+                    • "Take all the time you need"<br>
+                    • Listen without trying to fix or give advice
+                </div>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">Harmful Responses to Avoid</div>
+                <div class="resource-description">
+                    • "Everything happens for a reason"<br>
+                    • "God won't give you more than you can handle"<br>
+                    • "You need to forgive and move on"<br>
+                    • "At least..." (minimizing statements)<br>
+                    • "I know how you feel"<br>
+                    • Asking for details about the trauma<br>
+                    • Pressuring them to report or take action
+                </div>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">Secondary Trauma</div>
+                <div class="resource-description">
+                    Supporting trauma survivors can affect your own mental health. Watch for signs of secondary trauma: intrusive thoughts about their story, difficulty sleeping, increased anxiety, feeling overwhelmed. Practice self-care and seek support when needed.
+                </div>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">Know Your Limits</div>
+                <div class="resource-description">
+                    You are not responsible for someone's healing - that's work for professional therapists and ultimately God. You can offer friendship, prayer, and practical support, but you cannot and should not try to be their counselor. Encourage professional help when needed.
+                </div>
+            </div>
+        </div>
+
+        <!-- Therapy Resources -->
+        <div class="screen" id="therapy-resources">
+            <button class="back-btn" onclick="showScreen('resources')">← Back to Resources</button>
+            <div class="header">
+                <div class="logo">Trauma-Informed Christian Therapy</div>
+                <div class="subtitle">Finding professional help that honors faith</div>
+            </div>
+
+            <div class="verse">
+                "Plans fail for lack of counsel, but with many advisers they succeed."
+                <br><strong>- Proverbs 15:22</strong>
+            </div>
+
+            <div class="therapy-type">
+                <div class="therapy-title">EMDR (Eye Movement Desensitization and Reprocessing)</div>
+                <div class="therapy-description">
+                    Highly effective for processing traumatic memories. Uses bilateral stimulation to help the brain process trauma naturally. Many Christian EMDR therapists integrate prayer and faith into treatment.
+                </div>
+            </div>
+
+            <div class="therapy-type">
+                <div class="therapy-title">CPT (Cognitive Processing Therapy)</div>
+                <div class="therapy-description">
+                    Helps challenge and change unhelpful thoughts about the trauma. Particularly effective for self-blame and shame. Can be adapted to include biblical truth and Christian cognitive restructuring.
+                </div>
+            </div>
+
+            <div class="therapy-type">
+                <div class="therapy-title">DBT (Dialectical Behavior Therapy)</div>
+                <div class="therapy-description">
+                    Teaches practical skills for managing emotions, tolerating distress, and improving relationships. Many skills align with biblical principles of self-control and emotional regulation.
+                </div>
+            </div>
+
+            <div class="therapy-type">
+                <div class="therapy-title">Somatic Approaches</div>
+                <div class="therapy-description">
+                    Focus on how trauma is stored in the body. Includes techniques like breathing exercises, grounding, and body awareness. Can be integrated with understanding the body as God's temple.
+                </div>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">Finding Christian Trauma Therapists</div>
+                <div class="resource-description">
+                    • Psychology Today (filter for Christian/Religious)<br>
+                    • Christian Counselors Network<br>
+                    • AACC (American Association of Christian Counselors)<br>
+                    • Your church's referral list<br>
+                    • Trauma-informed therapy training programs<br>
+                    • RAINN's therapist locator with Christian filter
+                </div>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">Questions to Ask Potential Therapists</div>
+                <div class="resource-description">
+                    • What training do you have in trauma therapy?<br>
+                    • How do you integrate faith into treatment?<br>
+                    • What is your approach to sexual trauma specifically?<br>
+                    • How do you view the relationship between faith and mental health?<br>
+                    • Are you comfortable with prayer in sessions?<br>
+                    • Do you understand religious/spiritual concerns after trauma?
+                </div>
+            </div>
+        </div>
+
+        <!-- Support Groups Resource -->
+        <div class="screen" id="support-groups">
+            <button class="back-btn" onclick="showScreen('resources')">← Back to Resources</button>
+            <div class="header">
+                <div class="logo">Support Groups</div>
+                <div class="subtitle">Finding community in healing</div>
+            </div>
+
+            <div class="verse">
+                "As iron sharpens iron, so one person sharpens another."
+                <br><strong>- Proverbs 27:17</strong>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">RAINN Support Groups</div>
+                <div class="resource-description">
+                    <strong>Website:</strong> rainn.org/resources<br>
+                    <strong>Online Groups:</strong> Available 24/7<br>
+                    <strong>Focus:</strong> Sexual assault survivors of all backgrounds<br>
+                    <strong>Cost:</strong> Free<br>
+                    <strong>Format:</strong> Both group chat and one-on-one support
+                </div>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">Celebrate Recovery</div>
+                <div class="resource-description">
+                    <strong>Website:</strong> celebraterecovery.com<br>
+                    <strong>Locations:</strong> 35,000+ churches worldwide<br>
+                    <strong>Christian Focus:</strong> Christ-centered recovery program<br>
+                    <strong>Groups Include:</strong> Sexual abuse survivors, codependency<br>
+                    <strong>Format:</strong> Large group teaching + small group sharing
+                </div>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">Christians with Mental Illness</div>
+                <div class="resource-description">
+                    <strong>Platform:</strong> Facebook Group (Private)<br>
+                    <strong>Members:</strong> 15,000+ Christians<br>
+                    <strong>Focus:</strong> Mental health struggles including trauma<br>
+                    <strong>Activity:</strong> Daily posts, prayer requests, encouragement<br>
+                    <strong>Moderated:</strong> Safe, supportive environment
+                </div>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">Local Church Groups</div>
+                <div class="resource-description">
+                    Many churches offer trauma support groups. Ask your pastor about:<br>
+                    • GriefShare programs (often include trauma)<br>
+                    • Women's support groups<br>
+                    • Recovery ministry programs<br>
+                    • Stephen Ministry (one-on-one Christian care)<br>
+                    • Specialized trauma support groups
+                </div>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">Professional Group Therapy</div>
+                <div class="resource-description">
+                    Many therapists offer group therapy specifically for trauma survivors. Benefits include:<br>
+                    • Reduced isolation and shame<br>
+                    • Learning from others' experiences<br>
+                    • Practicing new skills in a safe environment<br>
+                    • Professional guidance with peer support
+                </div>
+            </div>
+        </div>
+
+        <!-- Education Resources -->
+        <div class="screen" id="education-resources">
+            <button class="back-btn" onclick="showScreen('resources')">← Back to Resources</button>
+            <div class="header">
+                <div class="logo">Books & Educational Materials</div>
+                <div class="subtitle">Learning about trauma and healing</div>
+            </div>
+
+            <div class="verse">
+                "And you will know the truth, and the truth will set you free."
+                <br><strong>- John 8:32</strong>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">Essential Books for Survivors</div>
+                <div class="resource-description">
+                    • <strong>"The Body Keeps the Score"</strong> by Bessel van der Kolk<br>
+                    • <strong>"Trauma and Recovery"</strong> by Judith Herman<br>
+                    • <strong>"Complex PTSD"</strong> by Pete Walker<br>
+                    • <strong>"The Courage to Heal"</strong> by Ellen Bass & Laura Davis<br>
+                    • <strong>"Waking the Tiger"</strong> by Peter Levine<br>
+                    • <strong>"My Name is Not Easy"</strong> by Christine Price
+                </div>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">Christian Books on Trauma</div>
+                <div class="resource-description">
+                    • <strong>"Rid of My Disgrace"</strong> by Justin & Lindsey Holcomb<br>
+                    • <strong>"Suffering and the Heart of God"</strong> by Diane Langberg<br>
+                    • <strong>"The Wounded Heart"</strong> by Dan Allender<br>
+                    • <strong>"On the Threshold of Hope"</strong> by Diane Langberg<br>
+                    • <strong>"Healing the Wounded Heart"</strong> by Dan Allender<br>
+                    • <strong>"Is It My Fault?"</strong> by Justin & Lindsey Holcomb
+                </div>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">Workbooks and Practical Resources</div>
+                <div class="resource-description">
+                    • <strong>"The PTSD Workbook"</strong> by Mary Beth Williams<br>
+                    • <strong>"The Sexual Healing Journey"</strong> by Wendy Maltz<br>
+                    • <strong>"Mind Over Mood"</strong> by Dennis Greenberger<br>
+                    • <strong>"The Anxiety and Worry Workbook"</strong> by David Clark<br>
+                    • <strong>"Trauma-Informed Healthcare Practice"</strong> by Megan Gerber
+                </div>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">Educational Websites</div>
+                <div class="resource-description">
+                    • <strong>National Center for PTSD:</strong> ptsd.va.gov<br>
+                    • <strong>RAINN:</strong> rainn.org/articles<br>
+                    • <strong>Trauma-Informed Oregon:</strong> traumainformedoregon.org<br>
+                    • <strong>SAMHSA:</strong> samhsa.gov/trauma-informed-care<br>
+                    • <strong>The Body is Not an Apology:</strong> Educational articles on trauma
+                </div>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">Podcasts for Survivors</div>
+                <div class="resource-description">
+                    • <strong>"Trauma Therapist"</strong> by Guy MacPherson<br>
+                    • <strong>"Made to Flourish"</strong> - Mental health and faith<br>
+                    • <strong>"Therapy for Black Girls"</strong> by Joy Harden Bradford<br>
+                    • <strong>"On Healing"</strong> by Natalie Gutierrez<br>
+                    • <strong>"Mental Health and the Church"</strong> by Christian psychologists
+                </div>
+            </div>
+        </div>
+
+        <!-- Survivor Scriptures -->
+        <div class="screen" id="survivor-scriptures">
+            <button class="back-btn" onclick="showScreen('resources')">← Back to Resources</button>
+            <div class="header">
+                <div class="logo">Scripture for Survivors</div>
+                <div class="subtitle">God's word for healing hearts</div>
+            </div>
+
+            <div class="verse">
+                "He heals the brokenhearted and binds up their wounds."
+                <br><strong>- Psalm 147:3</strong>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">For Shame and Self-Blame</div>
+                <div class="resource-description">
+                    <strong>Romans 8:1:</strong> "Therefore, there is now no condemnation for those who are in Christ Jesus."<br><br>
+                    <strong>Isaiah 43:4:</strong> "You are precious and honored in my sight, and I love you."<br><br>
+                    <strong>1 John 3:1:</strong> "See what great love the Father has lavished on us, that we should be called children of God!"<br><br>
+                    <strong>Psalm 139:14:</strong> "I praise you because I am fearfully and wonderfully made."
+                </div>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">For Fear and Anxiety</div>
+                <div class="resource-description">
+                    <strong>Isaiah 41:10:</strong> "So do not fear, for I am with you; do not be dismayed, for I am your God."<br><br>
+                    <strong>Psalm 23:4:</strong> "Even though I walk through the valley of the shadow of death, I will fear no evil, for you are with me."<br><br>
+                    <strong>2 Timothy 1:7:</strong> "For God has not given us a spirit of fear, but of power, love and sound mind."<br><br>
+                    <strong>Joshua 1:9:</strong> "Have I not commanded you? Be strong and courageous."
+                </div>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">For Anger and Rage</div>
+                <div class="resource-description">
+                    <strong>Ephesians 4:26:</strong> "In your anger do not sin: Do not let the sun go down while you are still angry."<br><br>
+                    <strong>Psalm 37:8:</strong> "Refrain from anger and turn from wrath; do not fret—it leads only to evil."<br><br>
+                    <strong>Proverbs 29:11:</strong> "Fools give full vent to their rage, but the wise bring calm in the end."<br><br>
+                    <strong>James 1:19:</strong> "Everyone should be quick to listen, slow to speak and slow to become angry."
+                </div>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">For Questions About God's Protection</div>
+                <div class="resource-description">
+                    <strong>Psalm 22:1:</strong> "My God, my God, why have you forsaken me?"<br><br>
+                    <strong>Habakkuk 1:2:</strong> "How long, Lord, must I call for help, but you do not listen?"<br><br>
+                    <strong>Job 13:15:</strong> "Though he slay me, yet will I hope in him."<br><br>
+                    <strong>Romans 8:28:</strong> "And we know that in all things God works for the good of those who love him."
+                </div>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">For Hope and Healing</div>
+                <div class="resource-description">
+                    <strong>Isaiah 61:1-3:</strong> "He has sent me to bind up the brokenhearted... to bestow on them a crown of beauty instead of ashes."<br><br>
+                    <strong>Revelation 21:4:</strong> "He will wipe every tear from their eyes. There will be no more death or mourning or crying or pain."<br><br>
+                    <strong>2 Corinthians 5:17:</strong> "Therefore, if anyone is in Christ, the new creation has come."<br><br>
+                    <strong>Jeremiah 29:11:</strong> "For I know the plans I have for you, plans to prosper you and not to harm you."
+                </div>
+            </div>
+        </div>
+
+        <!-- Loved Ones Resources -->
+        <div class="screen" id="loved-ones-resources">
+            <button class="back-btn" onclick="showScreen('resources')">← Back to Resources</button>
+            <div class="header">
+                <div class="logo">For Loved Ones</div>
+                <div class="subtitle">Supporting family and friends</div>
+            </div>
+
+            <div class="verse">
+                "Carry each other's burdens, and in this way you will fulfill the law of Christ."
+                <br><strong>- Galatians 6:2</strong>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">Understanding Secondary Trauma</div>
+                <div class="resource-description">
+                    Supporting a trauma survivor can affect your own mental health. Secondary trauma symptoms include intrusive thoughts about their experience, sleep problems, increased anxiety, and feeling overwhelmed. This is normal and doesn't mean you're weak.
+                </div>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">Books for Partners and Family</div>
+                <div class="resource-description">
+                    • <strong>"Partners in Healing"</strong> by Laura Davis<br>
+                    • <strong>"Allies in Healing"</strong> by Laura Davis<br>
+                    • <strong>"Stop Walking on Eggshells"</strong> by Paul Mason<br>
+                    • <strong>"The Sexual Healing Journey"</strong> by Wendy Maltz<br>
+                    • <strong>"Loving Someone with PTSD"</strong> by Aphrodite Matsakis
+                </div>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">Support Groups for Loved Ones</div>
+                <div class="resource-description">
+                    • <strong>Al-Anon:</strong> For families affected by trauma<br>
+                    • <strong>NAMI Family Support Groups:</strong> National Alliance on Mental Illness<br>
+                    • <strong>Local therapy groups:</strong> Many therapists offer family groups<br>
+                    • <strong>Church support groups:</strong> Ask your pastor about family ministry<br>
+                    • <strong>Online forums:</strong> Moderated support communities
+                </div>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">Self-Care for Supporters</div>
+                <div class="resource-description">
+                    • Set healthy boundaries - you can't fix or heal them<br>
+                    • Maintain your own interests and friendships<br>
+                    • Seek your own counseling when needed<br>
+                    • Practice stress-reduction techniques<br>
+                    • Remember: their healing is not your responsibility<br>
+                    • Trust God with both your journeys
+                </div>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-title">How Churches Can Help</div>
+                <div class="resource-description">
+                    • Trauma-informed training for staff and volunteers<br>
+                    • Safe spaces for survivors to share their stories<br>
+                    • Practical support (meals, childcare, transportation)<br>
+                    • Financial assistance for therapy costs<br>
+                    • Prayer support without pressure to "be healed"<br>
+                    • Education about trauma responses for the congregation
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <button class="nav-btn active" onclick="showScreen('dashboard'); setActiveNav(this)">
+                🏠<br>Home
+            </button>
+            <button class="nav-btn" onclick="showScreen('crisis'); setActiveNav(this)">
+                🆘<br>Crisis
+            </button>
+            <button class="nav-btn" onclick="showScreen('resources'); setActiveNav(this)">
+                📚<br>Resources
+            </button>
+            <button class="nav-btn" onclick="showModal('info-modal')">
+                ℹ️<br>Info
+            </button>
+            <button class="nav-btn" onclick="showScreen('about'); setActiveNav(this)">
+                👤<br>About
+            </button>
+        </div>
+
+        <!-- Info Modal -->
+        <div class="modal" id="info-modal">
+            <div class="modal-content">
+                <span class="close-btn" onclick="closeModal('info-modal')">&times;</span>
+                <h2>Beauty from Ashes</h2>
+                <h3>What This App Does</h3>
+                <p>Beauty from Ashes is a comprehensive Christian app for survivors of sexual trauma. It provides trauma-informed coping tools, healing resources, crisis support, and spiritual guidance rooted in biblical truth.</p>
+                
+                <h3>How to Use It</h3>
+                <ul>
+                    <li>Track your healing journey and progress</li>
+                    <li>Use coping tools during difficult moments</li>
+                    <li>Journal your thoughts and prayers safely</li>
+                    <li>Access crisis support when needed</li>
+                    <li>Find professional and spiritual resources</li>
+                </ul>
+                
+                <h3>Install on Your Phone</h3>
+                <p><strong>iPhone:</strong> Tap Share → Add to Home Screen</p>
+                <p><strong>Android:</strong> Tap Menu → Add to Home Screen</p>
+
+                <h3>Privacy</h3>
+                <p>All your data stays private on your device. Nothing is shared or stored online.</p>
+            </div>
+        </div>
+
+        <!-- Audio Element -->
+        <audio id="background-audio" loop>
+            <source src="data:audio/mpeg;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA/+M4wAAAAAAAAAAAAEluZm8AAAAPAAAAEAAABVgANTU1NTU1TURERERERERERE1NTU1NTU1YWFhYWFhYWFhsbGxsbGxsbGxsbLKysrKysrKysrLd3d3d3d3d3d3d6urq6urq6urq6urq9fX19fX19fX19fX1////////////////////AAAAAExhdmM1OC4xMwAAAAAAAAAAAAAAACQC7gAAAAAAAAVYDSAhFAAAAAAAAP/jOMAAAGRIAAQ0EAABhWQAAhOQAAI0EAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <script>
+        // App State
+        let currentScreen = 'welcome';
+        let healingData = JSON.parse(localStorage.getItem('healingData')) || {};
+        let journalEntries = JSON.parse(localStorage.getItem('healingJournal')) || [];
+        let appStats = JSON.parse(localStorage.getItem('traumaAppStats')) || {
+            healingDays: 0,
+            journalEntries: 0,
+            copingUses: 0,
+            milestones: 0
+        };
+        let safetyPlan = JSON.parse(localStorage.getItem('safetyPlan')) || {};
+        let groundingProgress = 0;
+
+        // Healing verses for daily encouragement
+        const healingVerses = [
+            {
+                text: "He heals the brokenhearted and binds up their wounds.",
+                ref: "Psalm 147:3"
+            },
+            {
+                text: "The Lord is close to the brokenhearted and saves those who are crushed in spirit.",
+                ref: "Psalm 34:18"
+            },
+            {
+                text: "You intended to harm me, but God intended it for good.",
+                ref: "Genesis 50:20"
+            },
+            {
+                text: "And we know that in all things God works for the good of those who love him.",
+                ref: "Romans 8:28"
+            },
+            {
+                text: "But he said to me, 'My grace is sufficient for you, for my power is made perfect in weakness.'",
+                ref: "2 Corinthians 12:9"
+            }
+        ];
+
+        // Scripture anchors for different struggles
+        const scriptureAnchors = {
+            shame: {
+                text: "Therefore, there is now no condemnation for those who are in Christ Jesus.",
+                ref: "Romans 8:1"
+            },
+            fear: {
+                text: "Have I not commanded you? Be strong and courageous. Do not be afraid; do not be discouraged, for the Lord your God will be with you wherever you go.",
+                ref: "Joshua 1:9"
+            },
+            anger: {
+                text: "In your anger do not sin: Do not let the sun go down while you are still angry.",
+                ref: "Ephesians 4:26"
+            },
+            trust: {
+                text: "Trust in the Lord with all your heart and lean not on your own understanding.",
+                ref: "Proverbs 3:5"
+            },
+            identity: {
+                text: "You are precious and honored in my sight, and I love you.",
+                ref: "Isaiah 43:4"
+            },
+            flashbacks: {
+                text: "When you pass through the waters, I will be with you; and when you pass through the rivers, they will not sweep over you.",
+                ref: "Isaiah 43:2"
+            },
+            nightmares: {
+                text: "When you lie down, you will not be afraid; when you lie down, your sleep will be sweet.",
+                ref: "Proverbs 3:24"
+            },
+            depression: {
+                text: "The Lord your God is with you, the Mighty Warrior who saves. He will take great delight in you; in his love he will no longer rebuke you, but will rejoice over you with singing.",
+                ref: "Zephaniah 3:17"
+            },
+            relationships: {
+                text: "Above all, love each other deeply, because love covers over a multitude of sins.",
+                ref: "1 Peter 4:8"
+            },
+            spiritual: {
+                text: "And surely I am with you always, to the very end of the age.",
+                ref: "Matthew 28:20"
+            }
+        };
+
+        // Initialize app
+        function init() {
+            updateStats();
+            updateDailyVerse();
+            loadJournalEntries();
+        }
+
+        // Navigation functions
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(screen => {
+                if (screen && screen.classList) {
+                    screen.classList.remove('active');
+                }
+            });
+            const targetScreen = document.getElementById(screenId);
+            if (targetScreen && targetScreen.classList) {
+                targetScreen.classList.add('active');
+            }
+            currentScreen = screenId;
+        }
+
+        function setActiveNav(element) {
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                if (btn && btn.classList) {
+                    btn.classList.remove('active');
+                }
+            });
+            if (element && element.classList) {
+                element.classList.add('active');
+            }
+        }
+
+        // Modal functions
+        function showModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal && modal.classList) {
+                modal.classList.add('active');
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal && modal.classList) {
+                modal.classList.remove('active');
+            }
+        }
+
+        // Audio functions
+        function toggleAudio() {
+            const audio = document.getElementById('background-audio');
+            const toggles = document.querySelectorAll('.audio-toggle');
+            
+            if (audio && audio.paused) {
+                audio.play();
+                toggles.forEach(toggle => {
+                    if (toggle) {
+                        toggle.textContent = '🔇 Music';
+                        if (toggle.classList) {
+                            toggle.classList.add('playing');
+                        }
+                    }
+                });
+            } else if (audio) {
+                audio.pause();
+                toggles.forEach(toggle => {
+                    if (toggle) {
+                        toggle.textContent = '🎵 Music';
+                        if (toggle.classList) {
+                            toggle.classList.remove('playing');
+                        }
+                    }
+                });
+            }
+        }
+
+        // Stats functions
+        function updateStats() {
+            const healingDaysElement = document.getElementById('healing-days');
+            const journalEntriesElement = document.getElementById('journal-entries');
+            const copingUsesElement = document.getElementById('coping-uses');
+            const milestonesElement = document.getElementById('milestones');
+            
+            if (healingDaysElement) healingDaysElement.textContent = appStats.healingDays;
+            if (journalEntriesElement) journalEntriesElement.textContent = appStats.journalEntries;
+            if (copingUsesElement) copingUsesElement.textContent = appStats.copingUses;
+            if (milestonesElement) milestonesElement.textContent = appStats.milestones;
+        }
+
+        function updateDailyVerse() {
+            const today = new Date().getDay();
+            const verse = healingVerses[today % healingVerses.length];
+            const verseElement = document.getElementById('daily-healing-verse');
+            const refElement = document.getElementById('daily-verse-ref');
+            
+            if (verseElement) verseElement.textContent = verse.text;
+            if (refElement) refElement.textContent = verse.ref;
+        }
+
+        // Healing journey functions
+        function trackStage(stage) {
+            const today = new Date().toDateString();
+            healingData[today] = {
+                stage: stage,
+                timestamp: new Date().toISOString()
+            };
+            localStorage.setItem('healingData', JSON.stringify(healingData));
+            
+            const stageMessages = {
+                'safety': 'Safety stage tracked. Every step toward safety matters.',
+                'processing': 'Processing stage tracked. You are brave for facing your trauma.',
+                'reconnection': 'Reconnection stage tracked. You are rebuilding beautifully.',
+                'thriving': 'Thriving stage tracked! You are using your story for good.'
+            };
+            
+            showMessage(stageMessages[stage], 'success');
+            updateJourneyProgress();
+        }
+
+        function updateJourneyProgress() {
+            const stages = Object.values(healingData);
+            const uniqueStages = [...new Set(stages.map(s => s.stage))];
+            const progress = (uniqueStages.length / 4) * 100;
+            const progressElement = document.getElementById('journey-progress');
+            if (progressElement) {
+                progressElement.style.width = progress + '%';
+            }
+        }
+
+        function saveHealingEntry() {
+            const reflectionElement = document.getElementById('healing-reflection');
+            if (!reflectionElement) return;
+            
+            const reflection = reflectionElement.value;
+            if (!reflection.trim()) {
+                showMessage('Please share your reflection before saving.', 'warning');
+                return;
+            }
+            
+            const entry = {
+                date: new Date().toDateString(),
+                reflection: reflection,
+                timestamp: new Date().toISOString()
+            };
+            
+            let reflections = JSON.parse(localStorage.getItem('healingReflections')) || [];
+            reflections.unshift(entry);
+            localStorage.setItem('healingReflections', JSON.stringify(reflections));
+            
+            reflectionElement.value = '';
+            showMessage('Healing reflection saved. God sees your progress.', 'success');
+        }
+
+        // Coping tools functions
+        function startGroundingBreathing() {
+            showMessage('Breathe in for 4 counts: "God, I am safe." Hold for 4. Breathe out for 6: "You are with me."', 'info');
+            appStats.copingUses++;
+            localStorage.setItem('traumaAppStats', JSON.stringify(appStats));
+            updateStats();
+        }
+
+        function showStopTechnique() {
+            showMessage('STOP: Stop what you are doing. Take 3 deep breaths. Observe: you are safe right now. Proceed with one safe action.', 'info');
+            appStats.copingUses++;
+            localStorage.setItem('traumaAppStats', JSON.stringify(appStats));
+            updateStats();
+        }
+
+        function showSelfCompassion() {
+            showMessage('Speak to yourself as God speaks to you: "You are loved. You are not responsible for what happened. You are healing. You are brave."', 'info');
+            appStats.copingUses++;
+            localStorage.setItem('traumaAppStats', JSON.stringify(appStats));
+            updateStats();
+        }
+
+        // Grounding exercise functions
+        function completeGrounding(type, element) {
+            if (element && element.classList) {
+                element.classList.add('completed');
+            }
+            groundingProgress += 16.67; // 6 items total
+            const progressBar = document.getElementById('grounding-progress');
+            if (progressBar) {
+                progressBar.style.width = groundingProgress + '%';
+            }
+            
+            const messages = {
+                'see': 'Good! Notice these visual details around you.',
+                'hear': 'Excellent! You are present and aware.',
+                'touch': 'Well done! Feel the textures and temperatures.',
+                'smell': 'Great! These scents anchor you to now.',
+                'taste': 'Perfect! You are fully present.',
+                'prayer': 'Beautiful! God is with you in this moment.'
+            };
+            
+            showMessage(messages[type], 'success');
+        }
+
+        function completeGroundingExercise() {
+            if (groundingProgress >= 100) {
+                appStats.copingUses++;
+                localStorage.setItem('traumaAppStats', JSON.stringify(appStats));
+                updateStats();
+                showMessage('Grounding exercise completed! You are present and safe.', 'success');
+                groundingProgress = 0;
+                const progressBar = document.getElementById('grounding-progress');
+                if (progressBar) {
+                    progressBar.style.width = '0%';
+                }
+                document.querySelectorAll('.grounding-item').forEach(item => {
+                    if (item && item.classList) {
+                        item.classList.remove('completed');
+                    }
+                });
+            } else {
+                showMessage('Please complete all grounding steps first.', 'warning');
+            }
+        }
+
+        // Thought defusion functions
+        function saveThoughtDefusion() {
+            const intrusiveElement = document.getElementById('intrusive-thought');
+            const defusedElement = document.getElementById('defused-thought');
+            const godsTruthElement = document.getElementById('gods-truth-thought');
+            
+            if (!intrusiveElement || !defusedElement) return;
+            
+            const intrusiveThought = intrusiveElement.value;
+            const defusedThought = defusedElement.value;
+            const godsTruth = godsTruthElement ? godsTruthElement.value : '';
+            
+            if (!intrusiveThought || !defusedThought) {
+                showMessage('Please complete the thought defusion exercise.', 'warning');
+                return;
+            }
+            
+            const entry = {
+                date: new Date().toDateString(),
+                intrusive: intrusiveThought,
+                defused: defusedThought,
+                godsTruth: godsTruth,
+                timestamp: new Date().toISOString()
+            };
+            
+            let thoughtWork = JSON.parse(localStorage.getItem('thoughtDefusion')) || [];
+            thoughtWork.unshift(entry);
+            localStorage.setItem('thoughtDefusion', JSON.stringify(thoughtWork));
+            
+            appStats.copingUses++;
+            localStorage.setItem('traumaAppStats', JSON.stringify(appStats));
+            updateStats();
+            
+            // Clear form
+            intrusiveElement.value = '';
+            defusedElement.value = '';
+            if (godsTruthElement) godsTruthElement.value = '';
+            
+            showMessage('Thought defusion completed. You have taken this thought captive to Christ.', 'success');
+        }
+
+        // Scripture anchoring functions
+        function findAnchorVerse() {
+            const struggleElement = document.getElementById('struggle-type');
+            if (!struggleElement) return;
+            
+            const struggle = struggleElement.value;
+            if (!struggle) {
+                showMessage('Please select what you are struggling with.', 'warning');
+                return;
+            }
+            
+            const anchor = scriptureAnchors[struggle];
+            const anchorTextElement = document.getElementById('anchor-text');
+            const anchorRefElement = document.getElementById('anchor-ref');
+            const anchorVerseElement = document.getElementById('anchor-verse');
+            
+            if (anchorTextElement) anchorTextElement.textContent = anchor.text;
+            if (anchorRefElement) anchorRefElement.textContent = anchor.ref;
+            if (anchorVerseElement) anchorVerseElement.style.display = 'block';
+        }
+
+        function saveAnchorVerse() {
+            const struggleElement = document.getElementById('struggle-type');
+            const prayerElement = document.getElementById('personal-prayer');
+            
+            if (!struggleElement) return;
+            
+            const struggle = struggleElement.value;
+            const prayer = prayerElement ? prayerElement.value : '';
+            
+            if (!struggle) {
+                showMessage('Please find an anchor verse first.', 'warning');
+                return;
+            }
+            
+            const entry = {
+                date: new Date().toDateString(),
+                struggle: struggle,
+                verse: scriptureAnchors[struggle],
+                prayer: prayer,
+                timestamp: new Date().toISOString()
+            };
+            
+            let anchors = JSON.parse(localStorage.getItem('scriptureAnchors')) || [];
+            anchors.unshift(entry);
+            localStorage.setItem('scriptureAnchors', JSON.stringify(anchors));
+            
+            appStats.copingUses++;
+            localStorage.setItem('traumaAppStats', JSON.stringify(appStats));
+            updateStats();
+            
+            showMessage('Scripture anchor saved! This verse will be your strength.', 'success');
+        }
+
+        // Journal functions
+        function saveHealingJournal() {
+            const feelingElement = document.getElementById('feeling-today');
+            const triggersElement = document.getElementById('triggers-today');
+            const copingElement = document.getElementById('coping-used');
+            const letterElement = document.getElementById('letter-to-god');
+            const gratitudeElement = document.getElementById('gratitude-list');
+            const selfCompassionElement = document.getElementById('self-compassion');
+            
+            if (!feelingElement) return;
+            
+            const feelingToday = feelingElement.value;
+            const triggersToday = triggersElement ? triggersElement.value : '';
+            const copingUsed = copingElement ? copingElement.value : '';
+            const letterToGod = letterElement ? letterElement.value : '';
+            const gratitudeList = gratitudeElement ? gratitudeElement.value : '';
+            const selfCompassion = selfCompassionElement ? selfCompassionElement.value : '';
+            
+            if (!feelingToday.trim()) {
+                showMessage('Please share how you are feeling today.', 'warning');
+                return;
+            }
+            
+            const entry = {
+                id: Date.now(),
+                date: new Date().toDateString(),
+                feeling: feelingToday,
+                triggers: triggersToday,
+                coping: copingUsed,
+                letterToGod: letterToGod,
+                gratitude: gratitudeList,
+                selfCompassion: selfCompassion,
+                timestamp: new Date().toISOString()
+            };
+            
+            journalEntries.unshift(entry);
+            localStorage.setItem('healingJournal', JSON.stringify(journalEntries));
+            
+            appStats.journalEntries++;
+            localStorage.setItem('traumaAppStats', JSON.stringify(appStats));
+            updateStats();
+            
+            // Clear form
+            if (feelingElement) feelingElement.value = '';
+            if (triggersElement) triggersElement.value = '';
+            if (copingElement) copingElement.value = '';
+            if (letterElement) letterElement.value = '';
+            if (gratitudeElement) gratitudeElement.value = '';
+            if (selfCompassionElement) selfCompassionElement.value = '';
+            
+            showMessage('Journal entry saved. God treasures your honest heart.', 'success');
+            loadJournalEntries();
+        }
+
+        function loadJournalEntries() {
+            try {
+                const container = document.getElementById('journal-entries-display');
+                if (!container) return;
+                
+                container.innerHTML = '';
+                
+                journalEntries.slice(0, 3).forEach(entry => {
+                    const entryDiv = document.createElement('div');
+                    if (entryDiv) {
+                        entryDiv.className = 'journal-entry';
+                        entryDiv.innerHTML = `
+                            <strong>${entry.date}</strong>
+                            <p>${entry.feeling.substring(0, 100)}${entry.feeling.length > 100 ? '...' : ''}</p>
+                        `;
+                        container.appendChild(entryDiv);
+                    }
+                });
+            } catch (error) {
+                console.error('Error loading journal entries:', error);
+            }
+        }
+
+        // Safety planning functions
+        function saveSafetyPlan() {
+            const contact1Element = document.getElementById('emergency-contact-1');
+            const therapistElement = document.getElementById('therapist-contact');
+            const hotlineElement = document.getElementById('crisis-hotline');
+            const warningElement = document.getElementById('warning-signs');
+            const copingElement = document.getElementById('helpful-coping');
+            const placesElement = document.getElementById('safe-places');
+            const versesElement = document.getElementById('safety-verses');
+            
+            safetyPlan = {
+                emergencyContact1: contact1Element ? contact1Element.value : '',
+                therapistContact: therapistElement ? therapistElement.value : '',
+                crisisHotline: hotlineElement ? hotlineElement.value : '',
+                warningSigns: warningElement ? warningElement.value : '',
+                helpfulCoping: copingElement ? copingElement.value : '',
+                safePlaces: placesElement ? placesElement.value : '',
+                safetyVerses: versesElement ? versesElement.value : '',
+                timestamp: new Date().toISOString()
+            };
+            
+            localStorage.setItem('safetyPlan', JSON.stringify(safetyPlan));
+            showMessage('Safety plan saved! You have a plan for difficult times.', 'success');
+        }
+
+        // Crisis functions
+        function showEmergencyContacts() {
+            showMessage('National Suicide Prevention Lifeline: 988\nRAINN Sexual Assault Hotline: 1-800-656-4673\nNational Domestic Violence Hotline: 1-800-799-7233', 'info');
+        }
+
+        function practiceStop() {
+            showMessage('STOP practiced! You are safe right now. Take three deep breaths. You are in control of this moment.', 'success');
+            appStats.copingUses++;
+            localStorage.setItem('traumaAppStats', JSON.stringify(appStats));
+            updateStats();
+        }
+
+        function useIceCube() {
+            showMessage('Ice cube grounding activated. The cold sensation helps ground you in the present moment. You are safe.', 'success');
+            appStats.copingUses++;
+            localStorage.setItem('traumaAppStats', JSON.stringify(appStats));
+            updateStats();
+        }
+
+        function changeLocation() {
+            showMessage('Good choice! Moving to a safer space can help interrupt crisis feelings. Trust your instincts about safety.', 'success');
+        }
+
+        function savePersonalPrayer() {
+            showMessage('Use the healing journal to write personal prayers to God. Your prayers are precious to Him.', 'info');
+        }
+
+        // Utility functions
+        function showMessage(text, type) {
+            const currentScreenElement = document.querySelector('.screen.active');
+            if (!currentScreenElement) return;
+            
+            // Remove existing messages
+            const existingMessages = currentScreenElement.querySelectorAll('.message');
+            existingMessages.forEach(msg => {
+                if (msg && msg.parentNode) {
+                    msg.remove();
+                }
+            });
+            
+            const messageDiv = document.createElement('div');
+            if (messageDiv) {
+                messageDiv.className = `message ${type}`;
+                messageDiv.textContent = text;
+                
+                // Insert after header
+                const header = currentScreenElement.querySelector('.header');
+                if (header) {
+                    header.insertAdjacentElement('afterend', messageDiv);
+                } else {
+                    currentScreenElement.insertBefore(messageDiv, currentScreenElement.firstChild);
+                }
+                
+                // Remove message after 5 seconds
+                setTimeout(() => {
+                    if (messageDiv && messageDiv.parentNode) {
+                        messageDiv.remove();
+                    }
+                }, 5000);
+            }
+        }
+
+        // Initialize app when page loads
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
